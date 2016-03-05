@@ -11,7 +11,7 @@ bot.message(containing: "test") do |event|
 end
 
 bot.message(from: "BrutalBeard", containing: "Suck it Ian!") do |event|
-  event.respond "The bot isn't ready you stupid idiot!"
+  event.respond "Johnny fires an arrow at Ian!"
 end
 
 bot.run
