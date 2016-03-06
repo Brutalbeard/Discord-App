@@ -10,8 +10,8 @@ bot.message(containing: "test") do |event|
   event.respond "Your test worked."
 end
 
-bot.message(from: "BrutalBeard", containing: "Suck it Ian!") do |event|
-  event.respond "Johnny fires an arrow at Ian!"
+bot.message(containing: "Suck it Ian!") do |event|
+  event.respond "#{event.user.name} fires an arrow at Ian!"
 end
 
 bot.run
