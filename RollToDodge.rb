@@ -1,22 +1,16 @@
-require 'discordrb'
+require 'discordrb' #uber fancy and useable library
 
-bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/")
+bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/") #credentials for login, the last string is the thing you have to type to run our commands. 
 
-#bot.message(containing: /\d{1,}[d]\d{1,2}/) do |event|
-  #event.respond "The bot isn't ready you stupid idiot!"
-  #end
-
-bot.message(containing: "test") do |event|
+bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command. 
   event.respond "Your test worked."
 end
 
-bot.message(containing: "Suck it Ian!") do |event|
+bot.message(containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see. 
   event.respond "#{event.user.name} fires an arrow at Ian!"
 end
 
-bot.command(:hi) { "Hi!" }
-
-bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg|
+bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below. 
   if arg.match(/\d{1,}[d]\d{1,2}/) == nil
     text = "Wrong syntax. Try /help roll"
   else
@@ -33,7 +27,7 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
    end
   text << "\nTotal: #{totRoll}"
   end
-  text
+  text #so this also differs from the messages above. Don't have to put event.respond. That's what was causing those double responses earlier. Just put the variable adter the last 'end' which closes out the 'do' at the top. Then it sends back that variable. Boom. 
 end
 
 bot.run
