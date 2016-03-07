@@ -16,4 +16,8 @@ end
 
 bot.command(:hi) { "Hi!" }
 
+bot.command(:roll, description: "Takes a minimum value, and a max value, and gives a random number in between the two.", usage: "Say !roll number number") do |event, min, max|
+  rand(min.to_i .. max.to_i)
+end
+
 bot.run
