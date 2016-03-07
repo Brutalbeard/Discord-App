@@ -7,11 +7,15 @@ bot.message(containing: "test") do |event| #obvious test message. Leaving it in 
 end
 
 bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see.
-  event.respond "#{event.user.name} fires an arrow at Ian!"
+  event.respond "#{event.author.mention} fires an arrow at Ian!"
 end
 
 bot.message(from: "Iblan", containing: "Suck it") do |event|
   even.respond "Shut up Ian."
+end
+
+bot.command(:shoot) do |event, arg|
+  "#{event.author.mention} shoots an arrow at #{arg}>"
 end
 
 bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
