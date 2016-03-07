@@ -19,11 +19,11 @@ bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you w
 end
 
 bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
-  if arg.to_i > 0
-    text = "#{event.author.mention} rolled a #{arg} sided die for... \n #{rand 1..arg.to_i}"
-  elsif arg.match(/\d{1,}[d]\d{1,2}/) == nil
+  if arg.match(/\d{1,}[d]\d{1,2}/) == nil
     text = "Wrong syntax. Try /help roll"
-  else
+  elsif arg.to_i > 0
+    text = "#{event.author.mention} rolled a #{arg} sided die for... \n #{rand 1..arg.to_i}"
+  elsif arg.match(/\d{1,}[d]\d{1,2}/)
     diceAmount = arg.split("d")[0].to_i
     diceType = arg.split("d")[1].to_i
     rolls = Array.new()
