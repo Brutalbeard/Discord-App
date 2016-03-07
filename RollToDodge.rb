@@ -1,6 +1,6 @@
 require 'discordrb' #uber fancy and useable library
 
-bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/") #credentials for login, the last string is the thing you have to type to run our commands.
+bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
 bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
   event.respond "Your test worked."
@@ -14,8 +14,8 @@ bot.message(from: "Iblan", containing: "Suck it") do |event|
   even.respond "Shut up Ian."
 end
 
-bot.command(:shoot) do |event, arg|
-  "#{event.author.mention} shoots an arrow at #{arg}>"
+bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
+  "#{event.author.mention} shoots an arrow at #{arg}"
 end
 
 bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
