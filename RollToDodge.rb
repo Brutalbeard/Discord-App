@@ -1,7 +1,7 @@
 require 'discordrb' #uber fancy and useable library
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
-# Turned off advanced_functionality above so that passing @username doesn't fail when being sent back
+
 bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
   event.respond "Your test worked."
 end
