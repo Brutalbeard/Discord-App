@@ -40,7 +40,7 @@ end
 
 #creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
 bot.command(:update, description: "Updates Bot from Github remotely", usage: "Type /update") do |event|
-  authUsers = ["150283399192510464", "143886187122262017"]
+  authUsers = [150283399192510464, 143886187122262017]
   event.respond "In Update #{event.author.mention}"
   if(authUsers.include? event.user.id)
     event.respond "Authorized user #{event.author.mention}. \n Initializing update"
