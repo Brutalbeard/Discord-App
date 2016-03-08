@@ -38,10 +38,12 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
   text #so this also differs from the messages above. Don't have to put event.respond. That's what was causing those double responses earlier. Just put the variable adter the last 'end' which closes out the 'do' at the top. Then it sends back that variable. Boom.
 end
 
-#creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
+#Functional remote update from github. No redundancy though. If github re-write crashes on startup, have to remote into the RPi and restart manually using
+#cd Discord\ App
+#nohup ruby RollToDodge.rb
 bot.command(:update, description: "Updates Bot from Github remotely", usage: "Type /update") do |event|
   authUsers = [150283399192510464, 143886187122262017]
-  event.respond "In Update #{event.author.mention}"
+  event.respond "Beginning Update #{event.author.mention}"
   if(authUsers.include? event.user.id)
     event.respond "Authorized user #{event.author.mention}. \n Initializing update"
     exec 'ruby pullMaster.rb'
