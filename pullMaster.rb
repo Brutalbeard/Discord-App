@@ -12,15 +12,15 @@ h.transaction do
 end
 
 #Gets current Branch Hash from pstore and sets in text variable for comparison
-h.transaction do
-puts "In fetch:"
-hashText = h.fetch(:hash)
-end
+#h.transaction do
+#  puts "In fetch:"
+#  hashText = h.fetch(:hash)
+#end
 
 #next lines for troubleshooting only.
-puts "Local Hash = #{hashText}"
-print "Remote hash = "
-puts `git rev-parse --verify HEAD`
+#puts "Local Hash = #{hashText}"
+#print "Remote hash = "
+#puts `git rev-parse --verify HEAD`
 
 
 puts "Updating 50%"
