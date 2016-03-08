@@ -1,8 +1,8 @@
 require "pstore"
 
-pid = ARGV[0]
+#pid = ARGV[0]
 
-`kill #{pid}` #internet says this is how I can send a system command
+#`kill #{pid}` #internet says this is how I can send a system command
 #set h as variable to contain Hash
 h = PStore.new("hash.pstore")
 hashText = String.new("")
@@ -34,7 +34,7 @@ puts "UPDATING"
 
 #pid = `pgrep ruby` #according to the internet, gives me back the return value
 
-`nohup ruby RollToDodge.rb` #If the above it right, then this starts the app without hanging up (no hang up) the app after the shell closes
+exec 'nohup ruby RollToDodge.rb' #If the above it right, then this starts the app without hanging up (no hang up) the app after the shell closes
 
 
 #if (hashText != `git rev-parse --verify HEAD`)
