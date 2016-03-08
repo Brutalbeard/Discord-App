@@ -43,9 +43,6 @@ bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Typ
   "In Fletcher update #{event.author.name}"
   "Authorized user #{event.author.mention}. \n Initializing update"
   `ruby pullMaster.rb`
-#  else
-#    "Unauthorized user. Get hosed."
-#  end
 end
 
 

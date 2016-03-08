@@ -24,7 +24,7 @@ puts `git rev-parse --verify HEAD`
 
 
 puts "Updating 50%"
-`git pull`
+#`git pull`
 puts "Update Complete"
 `ruby RollToDodge.rb`
 
