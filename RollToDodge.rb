@@ -3,7 +3,7 @@ require 'discordrb' #uber fancy and useable library
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
 bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
-  event.respond "Your test worked."
+  event.respond "Your test worked after Fletch's update program worked"
 end
 
 bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see.
@@ -40,10 +40,11 @@ end
 
 #creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
 bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event|
-  event.respond "In Update #{event.author}"
+  #event.respond "In Update #{event.author.mention}"
   if(event.author == "Anarkytt" || "BrutalBeard")
     event.respond "Authorized user #{event.author.mention}. \n Initializing update"
-    `ruby pullMaster.rb`
+    pid = `pgrep ruby`.chomp
+    `ruby pullMaster.rb "#{pid}"`
   else
     event.respond "Unauthorized user. Get hosed."
   end
