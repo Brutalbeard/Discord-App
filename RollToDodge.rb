@@ -41,12 +41,11 @@ end
 #creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
 bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event, arg|
   "In Fletcher update #{event.author.name}"
-  if(event.author.name == "Anarkytt" || "BrutalBeard")
-    "Authorized user #{event.author.mention}. \n Initializing update"
-    `ruby pullMaster.rb`
-  else
-    "Unauthorized user. Get hosed."
-  end
+  "Authorized user #{event.author.mention}. \n Initializing update"
+  `ruby pullMaster.rb`
+#  else
+#    "Unauthorized user. Get hosed."
+#  end
 end
 
 
