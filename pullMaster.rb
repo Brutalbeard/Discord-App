@@ -28,8 +28,8 @@ puts "UPDATING"
 `git pull`
 `ruby RollToDodge.rb`
 
-pid = `pidof ruby` #according to the internet, gives me back the return value
-`kill #{pid.to_s}` #internet says this is how I can send a system command
+pid = `pgrep ruby` #according to the internet, gives me back the return value
+`kill #{pid[0..3]}` #internet says this is how I can send a system command
 
 `nohup ruby RollToDodge.rb` #If the above it right, then this starts the app without hanging up (no hang up) the app after the shell closes
 
