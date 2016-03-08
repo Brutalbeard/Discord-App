@@ -24,7 +24,9 @@ puts `git rev-parse --verify HEAD`
 
 puts "UPDATING"
 
-`git pull --rebase`
+
+`git pull`
+`ruby RollToDodge.rb`
 
 
 #if (hashText != `git rev-parse --verify HEAD`)
