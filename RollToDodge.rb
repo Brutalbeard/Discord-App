@@ -15,7 +15,7 @@ bot.message(from: "Iblan", containing: "Suck it") do |event|
 end
 
 bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
-  "#{event.author.mention} shoots an arrow at #{arg}"
+  "#{event.author.mention} shoots an arrow at #{arg} for #{rand(1..8) damage!}"
 end
 
 bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
