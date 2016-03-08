@@ -3,7 +3,10 @@ require "pstore"
 h = PStore.new("hash.pstore")
 hashText = String.new("")
 h.transaction do
+  if (h.fetch(:hash)=="")
+  puts "Initializing"
   h[:hash] = "test"
+  end
 end
 
 h.transaction do
@@ -20,7 +23,8 @@ if (hashText != `git rev-parse --verify HEAD`)
   h.transaction do
     h[:hash] = `git rev-parse --verify HEAD`
   end
+  `git stage`
   `git commit -m "automatic pull"`
-  `git pull --rebase master`
+  `git pull --rebase`
   `ruby RollToDodge.rb`
 end

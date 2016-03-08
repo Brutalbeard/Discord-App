@@ -38,4 +38,13 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
   text #so this also differs from the messages above. Don't have to put event.respond. That's what was causing those double responses earlier. Just put the variable adter the last 'end' which closes out the 'do' at the top. Then it sends back that variable. Boom.
 end
 
+bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event|
+  if(event.author == "Anarkytt" || "BrutalBeard")
+    "Authorized user #{event.author.mention}. \n Initializing update"
+  else
+    "Unauthorized user. Get hosed."
+  end
+end
+
+
 bot.run
