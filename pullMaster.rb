@@ -28,6 +28,11 @@ puts "UPDATING"
 `git pull`
 `ruby RollToDodge.rb`
 
+pid = IO.popen('pidof ruby') #according to the internet, gives me back the return value
+`kill #{pid}` #internet says this is how I can send a system command
+
+`nohup ruby RollToDodge.rb` #If the above it right, then this starts the app without hanging up (no hang up) the app after the shell closes
+
 
 #if (hashText != `git rev-parse --verify HEAD`)
 #  print "In main:"
