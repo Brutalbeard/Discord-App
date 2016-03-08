@@ -3,7 +3,7 @@ require 'discordrb' #uber fancy and useable library
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
 bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
-  event.respond "Your test worked- after you changed this text, and pushed the commit again"
+  event.respond "Your test worked- even though fletcher is in bed"
 end
 
 bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see.
