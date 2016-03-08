@@ -23,7 +23,8 @@ print "Remote hash = "
 puts `git rev-parse --verify HEAD`
 
 puts "UPDATING"
-`git pull -f`
+
+`git pull --rebase`
 
 
 #if (hashText != `git rev-parse --verify HEAD`)
