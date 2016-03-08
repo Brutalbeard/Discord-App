@@ -29,8 +29,8 @@ puts `git rev-parse --verify HEAD`
 puts "UPDATING"
 
 
-`git pull`
-`ruby RollToDodge.rb`
+`git fetch --all`
+`git reset --hard origin/master`
 
 #pid = `pgrep ruby` #according to the internet, gives me back the return value
 
