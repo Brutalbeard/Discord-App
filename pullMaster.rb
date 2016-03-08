@@ -22,10 +22,10 @@ puts "Local Hash = #{hashText}"
 print "Remote hash = "
 puts `git rev-parse --verify HEAD`
 
-puts "UPDATING"
 
-
+puts "Updating 50%"
 `git pull`
+puts "Update Complete"
 `ruby RollToDodge.rb`
 
 

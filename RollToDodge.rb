@@ -3,7 +3,7 @@ require 'discordrb' #uber fancy and useable library
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
 bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
-  event.respond "Your test worked."
+  event.respond "Your test worked #{event.author.mention}."
 end
 
 bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see.
@@ -39,9 +39,9 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
 end
 
 #creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
-bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event|
-  "In Fletcher update #{event.author}"
-  if(event.author == "Anarkytt" || "BrutalBeard")
+bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event, arg|
+  "In Fletcher update #{event.author.name}"
+  if(event.author.name == "Anarkytt" || "BrutalBeard")
     "Authorized user #{event.author.mention}. \n Initializing update"
     `ruby pullMaster.rb`
   else
