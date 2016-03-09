@@ -115,7 +115,7 @@ appendages.transaction do
 end
 
 bot.command(:lop) do |event, arg|
-    event. respond "Tom lost an appendage!"
+    "Tom lost an appendage!"
 end
 
 bot.run
