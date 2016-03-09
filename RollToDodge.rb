@@ -82,10 +82,10 @@ bot.command(:whoami) do |event|
   event.respond "User Name: #{event.user.name}\n"
   event.respond "#{event.user.status}\n"
   event.respond "User ID: #{event.user.id}\n"
-  if event.user.voice_channel.exists?
+  if event.user.voice_channel != nil
     event.respond "Talking in: #{event.user.voice_channel}"
   end
-  if event.user.game.exists?
+  if event.user.game != nil
     event.respond "Playing: #{event.user.game}"
   end
 end
