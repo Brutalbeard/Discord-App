@@ -105,7 +105,7 @@ bot.command(:whois) do |event, arg|
 end
 
 #set Tom up with Appendages so we can remove them!
-appendages = Pstore.new(appendages.pstore)
+appendages = PStore.new('appendages.pstore')
 appendages.transaction do
   appendages[:one] = "Left Arm"
   appendages[:two] = "Right Arm"
