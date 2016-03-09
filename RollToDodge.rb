@@ -1,10 +1,19 @@
-require 'discordrb' #uber fancy and useable library
+grequire 'discordrb' #uber fancy and useable library
+require 'json'
+require 'open-uri'
+require 'pstore'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
+<<<<<<< HEAD
 bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
   event.respond "Your test worked #{event.author.mention}."
 end
+=======
+#bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
+#  event.respond "Your test worked- even though fletcher is in bed"
+#end
+>>>>>>> master
 
 bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see.
   event.respond "#{event.author.mention} fires an arrow at Ian!"
@@ -15,7 +24,7 @@ bot.message(from: "Iblan", containing: "Suck it") do |event|
 end
 
 bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
-  "#{event.author.mention} shoots an arrow at #{arg}"
+  "#{event.author.mention} shoots an arrow at #{arg} for #{rand(1..8)} damage!"
 end
 
 bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
@@ -38,6 +47,7 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
   text #so this also differs from the messages above. Don't have to put event.respond. That's what was causing those double responses earlier. Just put the variable adter the last 'end' which closes out the 'do' at the top. Then it sends back that variable. Boom.
 end
 
+<<<<<<< HEAD
 #creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
 bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event, arg|
   "In Fletcher update #{event.author.name}"
@@ -47,8 +57,80 @@ bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Typ
     `ruby pullMaster.rb`
   else
     "Unauthorized User. Get hosed."
+=======
+#Functional remote update from github. No redundancy though. If github re-write crashes on startup, have to remote into the RPi and restart manually using
+#cd Discord\ App
+#nohup ruby RollToDodge.rb
+bot.command(:update, description: "Updates Bot from Github remotely", usage: "Type /update") do |event|
+  authUsers = [150283399192510464, 143886187122262017]
+  event.respond "Beginning Update #{event.author.mention}"
+  if(authUsers.include? event.user.id)
+    event.respond "Authorized user #{event.author.mention}. \n Initializing update"
+    exec 'ruby pullMaster.rb'
+  else
+    "Unauthorized user. Get hosed biatch."
+>>>>>>> master
   end
 end
 
+bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, arg|
+
+  def parse(string)
+    val = JSON.parse(string)
+    puts "After Parse: #{val}"
+    val
+    rescue
+      "No Definition Found"
+  end
+
+  def get_uri(uri)
+    val = open(uri).read
+    puts "Value Returned By URI: #{val}"
+    val
+  end
+
+  def urbandictionary_uri(arg)
+    "http://api.urbandictionary.com/v0/define?term=#{arg}"
+  end
+
+  event << "#{arg.capitalize}: \n"
+  #event << parse(open("http://api.urbandictionary.com/v0/define?term=#{arg}").read)['definition']
+  event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
+
+bot.command(:whoami) do |event|
+  event.respond "User Name: #{event.user.name} (ID: #{event.user.id})\n"
+  event.respond "#{event.user.status}\n"
+  #event.respond "User ID: #{event.user.id}\n"
+  if event.user.voice_channel != nil
+    event.respond "Talking in: #{event.user.voice_channel.name}"
+  end
+  if event.user.game != nil
+    event.respond "Playing: #{event.user.game}"
+  end
+end
+
+<<<<<<< HEAD
+#set Tom up with Appendages so we can remove them!
+appendages = Pstore.new(appendages.pstore)
+appendages.transaction do
+  appendages.[:arms] = ["left","right"]
+  appendages.[:legs] = ["left","right","middle"]
+end
+bot.command(:lop) do |event|
+  event.respond "Tom loses an arm!"
+=======
+bot.command(:whois) do |event, arg|
+  arg = arg{2...arg.length}
+  event.respond "User Name: #{arg.name} (ID: #{arg})\n"
+  event.respond "#{arg.status}\n"
+  #event.respond "User ID: #{event.user.id}\n"
+  if event.user.voice_channel != nil
+    event.respond "Talking in: #{arg.voice_channel.name}"
+  end
+  if event.user.game != nil
+    event.respond "Playing: #{arg.game}"
+  end
+>>>>>>> refs/remotes/origin/master
+end
 
 bot.run
