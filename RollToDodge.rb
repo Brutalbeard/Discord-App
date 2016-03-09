@@ -54,8 +54,6 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
   end
 end
 
-
-
 bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, arg|
 
   def parse(string)
@@ -80,5 +78,12 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
   #event << parse(open("http://api.urbandictionary.com/v0/define?term=#{arg}").read)['definition']
   event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
 
+bot.command(:whoami) {|event|
+  """User Name: #{user.name}
+  #{user.status}
+  User ID: #{user.id}
+  Talking in: #{user.voice_channel}
+  Palying: #{user.game}"""
+}
 
 bot.run
