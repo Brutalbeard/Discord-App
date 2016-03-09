@@ -1,4 +1,4 @@
-grequire 'discordrb' #uber fancy and useable library
+require 'discordrb' #uber fancy and useable library
 require 'json'
 require 'open-uri'
 require 'pstore'
