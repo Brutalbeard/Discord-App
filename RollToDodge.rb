@@ -1,6 +1,7 @@
 grequire 'discordrb' #uber fancy and useable library
 require 'json'
 require 'open-uri'
+require 'pstore'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
@@ -88,6 +89,16 @@ bot.command(:whoami) do |event|
   if event.user.game != nil
     event.respond "Playing: #{event.user.game}"
   end
+end
+
+#set Tom up with Appendages so we can remove them!
+appendages = Pstore.new(appendages.pstore)
+appendages.transaction do
+  appendages.[:arms] = ["left","right"]
+  appendages.[:legs] = ["left","right","middle"]
+end
+bot.command(:lop) do |event|
+  event.respond "Tom loses an arm!"
 end
 
 bot.run
