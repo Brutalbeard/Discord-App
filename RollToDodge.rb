@@ -106,10 +106,8 @@ bot.command(:whois) do |event, arg|
 #set Tom up with Appendages so we can remove them!
 appendages = Pstore.new(appendages.pstore)
 appendages.transaction do
-  appendages.[:arms] = ["left","right"]
-  appendages.[:legs] = ["left","right","middle"]
 end
-bot.command(:lop) do |event|
+bot.command(:lop) do |event, arg|
     event. respond "Tom lost an arm!"
 end
 
