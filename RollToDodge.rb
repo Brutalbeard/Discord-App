@@ -79,11 +79,11 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
   event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
 
 bot.command(:whoami) {|event|
-  """User Name: #{user.name}
-  #{user.status}
-  User ID: #{user.id}
-  Talking in: #{user.voice_channel}
-  Palying: #{user.game}"""
+  """User Name: #{event.author.name}
+  #{uevent.author.status}
+  User ID: #{event.author.id}
+  Talking in: #{event.author.voice_channel}
+  Palying: #{event.author.game}"""
 }
 
 bot.run
