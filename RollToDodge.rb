@@ -90,7 +90,8 @@ bot.command(:whoami) do |event|
   end
 end
 
-bot.command(:whois) do |event, target|
+bot.command(:whois) do |event, arg|
+  target = arg[2...arg.length]
   event.respond "User Name: #{target.name} (ID: #{target})\n"
   event.respond "#{target.status}\n"
   #event.respond "User ID: #{event.user.id}\n"
