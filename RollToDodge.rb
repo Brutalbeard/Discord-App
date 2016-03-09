@@ -54,7 +54,7 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
   end
 end
 
-bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, arg|
+bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *arg|
 
   def parse(string)
     val = JSON.parse(string)
@@ -91,8 +91,6 @@ bot.command(:whoami) do |event|
 end
 
 bot.command(:whois) do |event, arg|
-  #arg = arg{2...arg.length}
-  event.respond "#{arg}"
   event.respond "User Name: #{arg.name} (ID: #{arg})\n"
   event.respond "#{arg.status}\n"
   #event.respond "User ID: #{event.user.id}\n"
