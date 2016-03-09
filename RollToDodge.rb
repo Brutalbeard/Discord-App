@@ -55,7 +55,7 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
   end
 end
 
-bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *args|
+bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *args.join ' '|
 
   def parse(string)
     val = JSON.parse(string)
