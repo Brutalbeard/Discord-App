@@ -90,16 +90,15 @@ bot.command(:whoami) do |event|
   end
 end
 
-bot.command(:whois) do |event, arg|
-  arg = event.mentions
-  event.respond "User Name: #{arg.name} (ID: #{arg})\n"
-  event.respond "#{arg.status}\n"
+bot.command(:whois) do |event, target|
+  event.respond "User Name: #{target.name} (ID: #{target})\n"
+  event.respond "#{target.status}\n"
   #event.respond "User ID: #{event.user.id}\n"
   if event.user.voice_channel != nil
-    event.respond "Talking in: #{arg.voice_channel.name}"
+    event.respond "Talking in: #{target.voice_channel.name}"
   end
   if event.user.game != nil
-    event.respond "Playing: #{arg.game}"
+    event.respond "Playing: #{target.game}"
   end
 end
 
