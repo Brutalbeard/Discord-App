@@ -57,7 +57,7 @@ end
 
 bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *args|
 
-  event.respond "#{*args}"
+  event.respond "#{args}"
 
   def parse(string)
     val = JSON.parse(string)
@@ -73,8 +73,8 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
     val
   end
 
-  def urbandictionary_uri(*args)
-    "http://api.urbandictionary.com/v0/define?term=#{*args}"
+  def urbandictionary_uri(args)
+    "http://api.urbandictionary.com/v0/define?term=#{args}"
   end
 
   event << "#{*args.capitalize}: \n"
