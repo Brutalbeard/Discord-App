@@ -80,17 +80,18 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
   event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
 
 bot.command(:whoami) do |event|
-  event.respond "User Name: #{event.user.name}\n"
+  event.respond "User Name: #{event.user.name} (ID: #{event.user.id})\n"
   event.respond "#{event.user.status}\n"
-  event.respond "User ID: #{event.user.id}\n"
+  #event.respond "User ID: #{event.user.id}\n"
   if event.user.voice_channel != nil
-    event.respond "Talking in: #{event.user.voice_channel}"
+    event.respond "Talking in: #{event.user.voice_channel.name}"
   end
   if event.user.game != nil
     event.respond "Playing: #{event.user.game}"
   end
 end
 
+<<<<<<< HEAD
 #set Tom up with Appendages so we can remove them!
 appendages = Pstore.new(appendages.pstore)
 appendages.transaction do
@@ -99,6 +100,19 @@ appendages.transaction do
 end
 bot.command(:lop) do |event|
   event.respond "Tom loses an arm!"
+=======
+bot.command(:whois) do |event, arg|
+  arg = arg{2...arg.length}
+  event.respond "User Name: #{arg.name} (ID: #{arg})\n"
+  event.respond "#{arg.status}\n"
+  #event.respond "User ID: #{event.user.id}\n"
+  if event.user.voice_channel != nil
+    event.respond "Talking in: #{arg.voice_channel.name}"
+  end
+  if event.user.game != nil
+    event.respond "Playing: #{arg.game}"
+  end
+>>>>>>> refs/remotes/origin/master
 end
 
 bot.run
