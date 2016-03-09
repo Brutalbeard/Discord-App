@@ -1,4 +1,4 @@
-grequire 'discordrb' #uber fancy and useable library
+require 'discordrb' #uber fancy and useable library
 require 'json'
 require 'open-uri'
 require 'pstore'
@@ -108,7 +108,7 @@ appendages = Pstore.new(appendages.pstore)
 appendages.transaction do
 end
 bot.command(:lop) do |event, arg|
-    event. respond "Tom lost an arm!"
+    event.respond "Tom lost an arm!"
 end
 
 bot.run
