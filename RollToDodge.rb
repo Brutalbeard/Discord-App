@@ -76,7 +76,7 @@ bot.command(:define) {|event, arg|
     "http://api.urbandictionary.com/v0/define?term=#{arg}"
   end
 
-  event << "Here's your definition for #{arg}"
+  event << "#{arg.capitalize}: \n"
   #event << parse(open("http://api.urbandictionary.com/v0/define?term=#{arg}").read)['definition']
   event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
 
