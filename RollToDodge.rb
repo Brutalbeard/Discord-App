@@ -1,6 +1,7 @@
-require 'discordrb' #uber fancy and useable library
+grequire 'discordrb' #uber fancy and useable library
 require 'json'
 require 'open-uri'
+require 'pstore'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
@@ -54,7 +55,7 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
   end
 end
 
-bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *arg|
+bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, arg|
 
   def parse(string)
     val = JSON.parse(string)
@@ -79,17 +80,18 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
   event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
 
 bot.command(:whoami) do |event|
-  event.respond "User Name: #{event.user.name} (ID: #{event.user.id})\n"
+  event.respond "User Name: #{event.user.name}\n"
   event.respond "#{event.user.status}\n"
-  #event.respond "User ID: #{event.user.id}\n"
+  event.respond "User ID: #{event.user.id}\n"
   if event.user.voice_channel != nil
-    event.respond "Talking in: #{event.user.voice_channel.name}"
+    event.respond "Talking in: #{event.user.voice_channel}"
   end
   if event.user.game != nil
     event.respond "Playing: #{event.user.game}"
   end
 end
 
+<<<<<<< HEAD
 bot.command(:whois) do |event, arg|
   target = arg[2...arg.length]
   event.respond "User Name: #{target.name} (ID: #{target})\n"
@@ -101,6 +103,15 @@ bot.command(:whois) do |event, arg|
   if event.user.game != nil
     event.respond "Playing: #{target.game}"
   end
+=======
+#set Tom up with Appendages so we can remove them!
+appendages = Pstore.new(appendages.pstore)
+appendages.transaction do
+  appendages.[:arms] = ["left","right"]
+  appendages.[:legs] = ["left","right","middle"]
 end
-
+bot.command(:lop) do |event|
+    event. respond "Tom lost an arm!"
+>>>>>>> Fletcher
+end
 bot.run

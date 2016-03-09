@@ -17,18 +17,16 @@ end
 
 #Gets current Branch Hash from pstore and sets in text variable for comparison
 h.transaction do
-puts "In fetch:"
-hashText = h.fetch(:hash)
+  hashText = h.fetch(:hash)
 end
 
-#next lines for troubleshooting only.
-puts "Local Hash = #{hashText}"
-print "Remote hash = "
-puts `git rev-parse --verify HEAD`
 
-puts "UPDATING"
-
-
+<<<<<<< HEAD
+puts "Updating 50%"
+`git pull`
+puts "Update Complete"
+`ruby RollToDodge.rb`
+=======
 `git fetch --all`
 `git reset --hard origin/master`
 
@@ -47,3 +45,4 @@ exec 'nohup ruby RollToDodge.rb' #If the above it right, then this starts the ap
 #  `git pull --rebase`
 #  `ruby RollToDodge.rb`
 #end
+>>>>>>> master
