@@ -56,7 +56,7 @@ end
 
 
 
-bot.command(:define) {|event, arg|
+bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, arg|
 
   def parse(string)
     val = JSON.parse(string)
