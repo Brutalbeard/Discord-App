@@ -93,14 +93,15 @@ end
 
 bot.command(:whois) do |event, arg|
   target = arg.gsub(/[<>@]/ , "")
-  event.respond "User Name: #{target.name} (ID: #{target})\n"
-  event.respond "#{target.status}\n"
-  #event.respond "User ID: #{event.user.id}\n"
-  if event.user.voice_channel != nil
-    event.respond "Talking in: #{target.voice_channel.name}"
+  user1 = bot.user(target)
+  event.respond "User Name: #{user1.name} \n"
+  event.respond "#{user1.status}\n"
+  event.respond "User ID: #{user1.id}\n"
+  if user1.voice_channel != nil
+    event.respond "Talking in: #{user1.voice_channel.name}"
   end
-  if event.user.game != nil
-    event.respond "Playing: #{target.game}"
+  if user1.game != nil
+    event.respond "Playing: #{user1.game}"
   end
 end
 
@@ -115,7 +116,12 @@ appendages.transaction do
 end
 
 bot.command(:lop) do |event|
-    "Tom lost an appendage!"
+  arm = String.new()
+  appendages.transaction do
+    arm = appendages.fetch(:one)
+  end
+
+    "Tom lost his #{arm}"
 end
 
 bot.run
