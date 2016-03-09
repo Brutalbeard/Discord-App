@@ -91,7 +91,6 @@ bot.command(:whoami) do |event|
   end
 end
 
-<<<<<<< HEAD
 bot.command(:whois) do |event, arg|
   target = arg[2...arg.length]
   event.respond "User Name: #{target.name} (ID: #{target})\n"
@@ -103,7 +102,7 @@ bot.command(:whois) do |event, arg|
   if event.user.game != nil
     event.respond "Playing: #{target.game}"
   end
-=======
+
 #set Tom up with Appendages so we can remove them!
 appendages = Pstore.new(appendages.pstore)
 appendages.transaction do
@@ -112,6 +111,6 @@ appendages.transaction do
 end
 bot.command(:lop) do |event|
     event. respond "Tom lost an arm!"
->>>>>>> Fletcher
 end
+
 bot.run
