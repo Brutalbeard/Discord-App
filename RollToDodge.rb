@@ -114,7 +114,7 @@ appendages.transaction do
   appendages[:five] = "Middle LEG"
 end
 
-bot.gcommand(:lop) do |event|
+bot.command(:lop) do |event|
     "Tom lost an appendage!"
 end
 
