@@ -14,7 +14,7 @@ bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will pr
 end
 
 bot.message(from: "Iblan", containing: "Suck it") do |event|
-  event.respond "Shut up Ian."
+  even.respond "Shut up Ian."
 end
 
 bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
@@ -81,9 +81,9 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
   #event << parse(open("http://api.urbandictionary.com/v0/define?term=#{arg}").read)['definition']
   event << parse(get_uri(urbandictionary_uri(args)))['list'].first['definition']}
 
-bot.command(:whoami) do |event|
+bot.command(:whoami, description: "Gives your name and user ID. Also tells you your chat channel and game you're playing", usage: "/whoami") do |event|
   event.respond "User Name: #{event.user.name}\n"
-  event.respond "#{event.user.status}\n"
+  #event.respond "#{event.user.status}\n"
   event.respond "User ID: #{event.user.id}\n"
   if event.user.voice_channel != nil
     event.respond "Talking in: #{event.user.voice_channel}"
@@ -93,7 +93,7 @@ bot.command(:whoami) do |event|
   end
 end
 
-bot.command(:whois) do |event, arg|
+bot.command(:whois, descrption: "Gives you the useful info about your cohorts", usage: "/whois @RollToDodge") do |event, arg|
   user1 = bot.parse_mention(arg)
   event.respond "User Name: #{user1.name} \n"
   event.respond "#{user1.status}\n"
