@@ -55,9 +55,9 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
   end
 end
 
-bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *args.join ' '|
+bot.command(:define, description: "Defines a word using Urban Dictionary", usage: "/define chode") {|event, *args|
 
-  event << "#{args}"
+  args = args.join(' ')
 
   def parse(string)
     val = JSON.parse(string)
@@ -79,7 +79,7 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
 
   event << "#{args.capitalize}: \n"
   #event << parse(open("http://api.urbandictionary.com/v0/define?term=#{arg}").read)['definition']
-  event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
+  event << parse(get_uri(urbandictionary_uri(args)))['list'].first['definition']}
 
 bot.command(:whoami) do |event|
   event.respond "User Name: #{event.user.name}\n"
