@@ -51,6 +51,28 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
     "Unauthorized user. Get hosed biatch."
   end
 end
+bot.command(:definition) {|event, arg|
+  def parse(string)
+  val = JSON.parse(string)
+  puts "After Parse: #{val}"
+  val
+rescue
+  "No Definition Found"
+end
+
+def get_uri(uri)
+  val = open(uri).read
+  puts "Value Returned By URI: #{val}"
+  val
+end
+
+def urbandictionary_uri(arg)
+  "http://api.urbandictionary.com/v0/define?term=#{arg}"
+end
+  event << "Here's your definition for #{arg}"
+  #event << parse(open("http://api.urbandictionary.com/v0/define?term=#{arg}").read)['definition']
+  event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']
+end
 
 
 bot.run
