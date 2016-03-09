@@ -102,13 +102,20 @@ bot.command(:whois) do |event, arg|
   if event.user.game != nil
     event.respond "Playing: #{target.game}"
   end
+end
 
 #set Tom up with Appendages so we can remove them!
 appendages = Pstore.new(appendages.pstore)
 appendages.transaction do
+  appendages[:one] = "Left Arm"
+  appendages[:two] = "Right Arm"
+  appendages[:three] = "Left Leg"
+  appendages[:four] = "Right Leg"
+  appendages[:five] = "Middle LEG"
 end
+
 bot.command(:lop) do |event, arg|
-    event. respond "Tom lost an arm!"
+    event. respond "Tom lost an appendage!"
 end
 
 bot.run
