@@ -93,18 +93,7 @@ bot.command(:whoami) do |event|
   end
 end
 
-bot.command(:whois) do |event, arg|
-  target = arg.gsub(/[<>@]/ , '').to_i
-  event.respond "User Name: #{target.name} (ID: #{target})\n"
-  event.respond "#{target.status}\n"
-  #event.respond "User ID: #{event.user.id}\n"
-  if event.user.voice_channel != nil
-    event.respond "Talking in: #{target.voice_channel.name}"
-  end
-  if event.user.game != nil
-    event.respond "Playing: #{target.game}"
-  end
-end
+
 
 #set Tom up with Appendages so we can remove them!
 appendages = PStore.new("appendages.pstore")
