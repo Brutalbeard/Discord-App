@@ -5,15 +5,9 @@ require 'pstore'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
-<<<<<<< HEAD
-bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
-  event.respond "Your test worked #{event.author.mention}."
-end
-=======
 #bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
 #  event.respond "Your test worked- even though fletcher is in bed"
 #end
->>>>>>> master
 
 bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will probably make this cooler. You'll see.
   event.respond "#{event.author.mention} fires an arrow at Ian!"
@@ -47,17 +41,6 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
   text #so this also differs from the messages above. Don't have to put event.respond. That's what was causing those double responses earlier. Just put the variable adter the last 'end' which closes out the 'do' at the top. Then it sends back that variable. Boom.
 end
 
-<<<<<<< HEAD
-#creating an update command that will call PullMaster.rb, wich we can put a minimum set of terminal commands to run git pull, then ruby RollToDodge to restart the Bot.
-bot.command(:update, description: "Updates Bot using PullMaster.rb", usage: "Type /update") do |event, arg|
-  "In Fletcher update #{event.author.name}"
-  name = String.new (event.author.name)
-  if (name == "Anarkytt" || "Brutalbeard") do
-    "Authorized user #{event.author.mention}. \nInitializing update"
-    `ruby pullMaster.rb`
-  else
-    "Unauthorized User. Get hosed."
-=======
 #Functional remote update from github. No redundancy though. If github re-write crashes on startup, have to remote into the RPi and restart manually using
 #cd Discord\ App
 #nohup ruby RollToDodge.rb
@@ -69,7 +52,6 @@ bot.command(:update, description: "Updates Bot from Github remotely", usage: "Ty
     exec 'ruby pullMaster.rb'
   else
     "Unauthorized user. Get hosed biatch."
->>>>>>> master
   end
 end
 
@@ -98,18 +80,17 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
   event << parse(get_uri(urbandictionary_uri(arg)))['list'].first['definition']}
 
 bot.command(:whoami) do |event|
-  event.respond "User Name: #{event.user.name} (ID: #{event.user.id})\n"
+  event.respond "User Name: #{event.user.name}\n"
   event.respond "#{event.user.status}\n"
-  #event.respond "User ID: #{event.user.id}\n"
+  event.respond "User ID: #{event.user.id}\n"
   if event.user.voice_channel != nil
-    event.respond "Talking in: #{event.user.voice_channel.name}"
+    event.respond "Talking in: #{event.user.voice_channel}"
   end
   if event.user.game != nil
     event.respond "Playing: #{event.user.game}"
   end
 end
 
-<<<<<<< HEAD
 #set Tom up with Appendages so we can remove them!
 appendages = Pstore.new(appendages.pstore)
 appendages.transaction do
@@ -117,20 +98,6 @@ appendages.transaction do
   appendages.[:legs] = ["left","right","middle"]
 end
 bot.command(:lop) do |event|
-  event.respond "Tom loses an arm!"
-=======
-bot.command(:whois) do |event, arg|
-  arg = arg{2...arg.length}
-  event.respond "User Name: #{arg.name} (ID: #{arg})\n"
-  event.respond "#{arg.status}\n"
-  #event.respond "User ID: #{event.user.id}\n"
-  if event.user.voice_channel != nil
-    event.respond "Talking in: #{arg.voice_channel.name}"
-  end
-  if event.user.game != nil
-    event.respond "Playing: #{arg.game}"
-  end
->>>>>>> refs/remotes/origin/master
+    event. respond "Tom lost an arm!"
 end
-
 bot.run
