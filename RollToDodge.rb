@@ -120,7 +120,7 @@ bot.command(:lop) do |event|
     "Tom lost an appendage!"
 end
 
-bot.command(:bow) do |event|
+bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |event|
   api_key = "dc6zaTOxFJmzC"
 
   searchFor = "bow"
@@ -141,11 +141,11 @@ bot.command(:bow) do |event|
     val
   end
 
-  event << parse(get_uri(giphyRequest))['data'].sample['url']
+  event << parse(get_uri(giphyRequest))['data'].sample['url']['original']['url']
 
 end
 
-bot.command(:gifme) do |event, *args|
+bot.command(:gifme, descrption: "Gives you a gif based off what you type", usage: "/gifme stupid people") do |event, *args|
   api_key = "dc6zaTOxFJmzC"
 
   searchFor = args.join('+')
@@ -166,7 +166,7 @@ bot.command(:gifme) do |event, *args|
     val
   end
 
-  event << parse(get_uri(giphyRequest))['data'].sample['url']
+  event << parse(get_uri(giphyRequest))['data'].sample['images']['original']['url']
 
 end
 
