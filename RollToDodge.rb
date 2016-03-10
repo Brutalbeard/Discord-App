@@ -61,7 +61,7 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
 
   def parse(string)
     val = JSON.parse(string)
-    puts "After Parse: #{val}"
+    #puts "After Parse: #{val}"
     val
     rescue
       "No Definition Found"
@@ -69,7 +69,7 @@ bot.command(:define, description: "Defines a word using Urban Dictionary", usage
 
   def get_uri(uri)
     val = open(uri).read
-    puts "Value Returned By URI: #{val}"
+    #puts "Value Returned By URI: #{val}"
     val
   end
 
