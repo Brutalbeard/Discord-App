@@ -145,7 +145,7 @@ bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |even
 
 end
 
-bot.command(:gifme, description: "Gives you a gif based off what you type", usage: "/gifme stupid people") do |event, *args|
+bot.command(:gifme, description: "Gives you a random gif based off what you type", usage: "/gifme stupid people") do |event, *args|
   api_key = "dc6zaTOxFJmzC"
 
   searchFor = args.join('+')
