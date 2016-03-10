@@ -18,7 +18,7 @@ bot.message(from: "Iblan", containing: "Suck it") do |event|
   even.respond "Shut up Ian."
 end
 
-bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
+bot.command(:shoot, description: "Shoots an arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
   "#{event.author.mention} shoots an arrow at #{arg} for #{rand(1..8)} damage!"
 end
 
