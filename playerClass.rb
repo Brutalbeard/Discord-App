@@ -2,7 +2,7 @@ class Player
 
   def initialize(userId, name)
     @player_id = userId
-    @charcter_name = name
+    @character_name = name
   end
 
   def getStats(health, strength, dexterity, intelligence, consitution, charisma, wisdom)
