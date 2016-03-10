@@ -120,4 +120,29 @@ bot.command(:lop) do |event|
     "Tom lost an appendage!"
 end
 
+bot.command(:bow) do |event|
+  api_key = "dc6zaTOxFJmzC"
+
+  searchFor = "bow"
+
+  giphyRequest = "http://api.giphy.com/v1/gifs/search?q=#{searchFor}&api_key=#{api_key}"
+
+  def parse(string)
+    val = JSON.parse(string)
+    puts "After Parse: #{val}"
+    val
+    rescue
+      "No Definition Found"
+  end
+
+  def get_uri(uri)
+    val = open(uri).read
+    puts "Value Returned By URI: #{val}"
+    val
+  end
+
+  event << parse(get_uri(giphyRequest))['data'].sample['url']
+
+end
+
 bot.run
