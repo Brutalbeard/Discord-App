@@ -129,7 +129,7 @@ bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |even
 
   def parse(string)
     val = JSON.parse(string)
-    puts "After Parse: #{val}"
+    #puts "After Parse: #{val}"
     val
     rescue
       "No Definition Found"
@@ -137,7 +137,7 @@ bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |even
 
   def get_uri(uri)
     val = open(uri).read
-    puts "Value Returned By URI: #{val}"
+    #puts "Value Returned By URI: #{val}"
     val
   end
 
@@ -154,7 +154,7 @@ bot.command(:gifme, descrption: "Gives you a gif based off what you type", usage
 
   def parse(string)
     val = JSON.parse(string)
-    puts "After Parse: #{val}"
+    #puts "After Parse: #{val}"
     val
     rescue
       "No Definition Found"
@@ -162,7 +162,7 @@ bot.command(:gifme, descrption: "Gives you a gif based off what you type", usage
 
   def get_uri(uri)
     val = open(uri).read
-    puts "Value Returned By URI: #{val}"
+    #puts "Value Returned By URI: #{val}"
     val
   end
 
