@@ -141,7 +141,7 @@ bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |even
     val
   end
 
-  event << parse(get_uri(giphyRequest))['data'].sample['url']['original']['url']
+  event << parse(get_uri(giphyRequest))['data'].sample['images']['original']['url']
 
 end
 
