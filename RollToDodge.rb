@@ -2,7 +2,7 @@ require 'discordrb' #uber fancy and useable library
 require 'json'
 require 'open-uri'
 require 'pstore'
-require 'playerClass.rb'
+require './playerClass'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
@@ -169,6 +169,23 @@ bot.command(:gifme, description: "Gives you a random gif based off what you type
 
   event << parse(get_uri(giphyRequest))['data'].sample['images']['original']['url']
 
+end
+
+bot.command(:makeMe) do |event, arg|
+  event.user.id = Player.new
+  event.user.id.character_name = arg
+  "#{event.user.id.character_name}"
+end
+
+bot.command(:makeStat) do |event, *args|
+  newb = bot.parse_mention(args[0])
+  newb.args[1] = args[3]
+  "#{newb.args[1]}"
+end
+
+bot.command(:showMe) do |event, *args|
+  #player = bot.parse_mention(arg1)
+  newb.hit_points
 end
 
 bot.run

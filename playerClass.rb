@@ -1,19 +1,6 @@
 class Player
 
-  def initialize(userId, name)
-    @player_id = userId
-    @character_name = name
-  end
-
-  def getStats(health, strength, dexterity, intelligence, consitution, charisma, wisdom)
-    @hit_points = health
-    @str = strength
-    @dex = dexterity
-    @int = intelligence
-    @con = consitution
-    @cha = charisma
-    @wis = wisdom
-  end
+  attr_accessor :hit_points, :str, :dex, :int, :con, :cha, :wis, :character_name, :player_id
 
   def changeHealth (hp)
     @hit_points += hp
@@ -23,9 +10,5 @@ class Player
     arr = [@hit_points, @str, @dex, @int, @con, @cha, @wis]
     return arr
   end
-
-
-
-
 
 end
