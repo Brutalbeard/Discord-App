@@ -4,7 +4,7 @@ require 'open-uri'
 require 'pstore'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
-
+bot.game = "with your mind."
 #bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
 #  event.respond "Your test worked- even though fletcher is in bed"
 #end
