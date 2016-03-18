@@ -5,7 +5,6 @@ require 'pstore'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
-#bot.game = "with your mind."
 
 #bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
 #  event.respond "Your test worked- even though fletcher is in bed"
@@ -119,7 +118,25 @@ appendages.transaction do
 end
 
 bot.command(:lop) do |event|
-    "Tom lost an appendage!"
+  a = String.new()
+  roll = rand(1..5)
+  case roll
+    when 1
+      a = "one"
+    when 2
+      a = "two"
+    when 3
+      a = "three"
+    when 4
+      a = "four"
+    when 5
+      a = "five"
+  end
+
+  appendages.transaction do
+    lost = appendages.fetch(:"#{a}")
+    "Tom lost his #{lost}"
+  end
 end
 
 bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |event|
