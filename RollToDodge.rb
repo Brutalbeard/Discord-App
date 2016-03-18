@@ -117,7 +117,7 @@ appendages.transaction do
   appendages[:five] = "Middle LEG"
 end
 
-bot.command(:lop) do |event|
+bot.command(:lop, description: "Takes an Appendage from Tom.", usage: "/lop") do |event|
   a = String.new()
   roll = rand(1..5)
   case roll
