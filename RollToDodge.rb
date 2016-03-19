@@ -15,7 +15,7 @@ bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will pr
 end
 
 bot.message(from: "Iblan", containing: "Suck it") do |event|
-  even.respond "Shut up Ian."
+  event.respond "Shut up Ian."
 end
 
 bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
