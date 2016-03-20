@@ -6,6 +6,7 @@ require './playerClass'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
+
 #bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
 #  event.respond "Your test worked- even though fletcher is in bed"
 #end
@@ -15,7 +16,7 @@ bot.message(from: not!("Iblan"), containing: "Suck it Ian!") do |event| #Will pr
 end
 
 bot.message(from: "Iblan", containing: "Suck it") do |event|
-  even.respond "Shut up Ian."
+  event.respond "Shut up Ian."
 end
 
 bot.command(:shoot, description: "Shoots an arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
@@ -117,8 +118,26 @@ appendages.transaction do
   appendages[:five] = "Middle LEG"
 end
 
-bot.command(:lop) do |event|
-    "Tom lost an appendage!"
+bot.command(:lop, description: "Takes an Appendage from Tom.", usage: "/lop") do |event|
+  a = String.new()
+  roll = rand(1..5)
+  case roll
+    when 1
+      a = "one"
+    when 2
+      a = "two"
+    when 3
+      a = "three"
+    when 4
+      a = "four"
+    when 5
+      a = "five"
+  end
+
+  appendages.transaction do
+    lost = appendages.fetch(:"#{a}")
+    "Tom lost his #{lost}"
+  end
 end
 
 bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |event|
@@ -142,7 +161,7 @@ bot.command(:bow, description: "Gives a random bow gif", usage: "/bow") do |even
     val
   end
 
-  event << parse(get_uri(giphyRequest))['data'].sample['url']['original']['url']
+  event << parse(get_uri(giphyRequest))['data'].sample['images']['original']['url']
 
 end
 
