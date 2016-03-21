@@ -2,6 +2,7 @@ require 'discordrb' #uber fancy and useable library
 require 'json'
 require 'open-uri'
 require 'pstore'
+require './playerClass'
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
@@ -18,7 +19,7 @@ bot.message(from: "Iblan", containing: "Suck it") do |event|
   event.respond "Shut up Ian."
 end
 
-bot.command(:shoot, description: "Shoots and arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
+bot.command(:shoot, description: "Shoots an arrow at whoever, or whatever you want", usage: "Type /shoot Ian") do |event, arg|
   "#{event.author.mention} shoots an arrow at #{arg} for #{rand(1..8)} damage!"
 end
 
@@ -187,6 +188,30 @@ bot.command(:gifme, description: "Gives you a random gif based off what you type
 
   event << parse(get_uri(giphyRequest))['data'].sample['images']['original']['url']
 
+end
+
+
+bot.command(:makeMe) do |event, *args|
+  player = PStore.new("#{event.user.id}.pstore")
+  player.transaction do
+    player[:name] = args.join(' ')
+  end
+  player.transaction {player[:name]}
+end
+
+bot.command(:makeStat) do |event, *args|
+  player = PStore.new("#{event.user.id}.pstore")
+
+  player.transaction do
+    player[:"#{args[0]}"] = args[1]
+  end
+end
+
+bot.command(:showMe) do |event, arg|
+  player = PStore.new("#{event.user.id}.pstore")
+  player.transaction do
+    "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{arg}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
+  end
 end
 
 bot.run
