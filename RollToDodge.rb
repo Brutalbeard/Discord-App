@@ -191,7 +191,7 @@ bot.command(:gifme, description: "Gives you a random gif based off what you type
 end
 
 
-bot.command(:makeMe) do |event, *args|
+bot.command(:makeMe, description: "Initializes your character sheet", usage: "/makeMe Connor") do |event, *args|
   player = PStore.new("#{event.user.id}.pstore")
   player.transaction do
     player[:name] = args.join(' ')
@@ -199,7 +199,7 @@ bot.command(:makeMe) do |event, *args|
   player.transaction {player[:name]}
 end
 
-bot.command(:makeStat) do |event, *args|
+bot.command(:makeStat, description: "Generates, and currently changes, a stat", usage: "/makeStat con 10") do |event, *args|
   player = PStore.new("#{event.user.id}.pstore")
 
   player.transaction do
@@ -207,7 +207,7 @@ bot.command(:makeStat) do |event, *args|
   end
 end
 
-bot.command(:showMe) do |event, arg|
+bot.command(:showMe, description: "Tells you one of your stats", usage: "/showMe name, or /showMe con") do |event, arg|
   player = PStore.new("#{event.user.id}.pstore")
   player.transaction do
     "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{arg}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
