@@ -190,21 +190,28 @@ bot.command(:gifme, description: "Gives you a random gif based off what you type
 
 end
 
-bot.command(:makeMe) do |event, arg|
-  event.user.id = Player.new
-  event.user.id.character_name = arg
-  "#{event.user.id.character_name}"
+
+bot.command(:makeMe) do |event, *args|
+  player = PStore.new("#{event.user.id}.pstore")
+  player.transaction do
+    player[:name] = args.join(' ')
+  end
+  player.transaction {player[:name]}
 end
 
 bot.command(:makeStat) do |event, *args|
-  newb = bot.parse_mention(args[0])
-  newb.args[1] = args[3]
-  "#{newb.args[1]}"
+  player = PStore.new("#{event.user.id}.pstore")
+
+  player.transaction do
+    player[:"#{args[0]}"] = args[1]
+  end
 end
 
-bot.command(:showMe) do |event, *args|
-  #player = bot.parse_mention(arg1)
-  newb.hit_points
+bot.command(:showMe) do |event, arg|
+  player = PStore.new("#{event.user.id}.pstore")
+  player.transaction do
+    "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{arg}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
+  end
 end
 
 bot.run
