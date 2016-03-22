@@ -5,7 +5,7 @@ require 'pstore'
 require './playerClass'
 
 #FUNCTIONS
-def checkValidStat(arg) #Checks that the requested string is related to a valid Player Attribute
+def checkValidStat(arg) #Checks that the requested string is related to a valid Player Attribute NOTE: returns nil if not a valid option
   statName = arg
   case statName
   when "con" , "Con" , "constitution" , "Constitution"
@@ -24,7 +24,7 @@ def checkValidStat(arg) #Checks that the requested string is related to a valid 
 end
 
 
-#BOT
+#BOT--------------------
 
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
@@ -213,6 +213,9 @@ bot.command(:gifme, description: "Gives you a random gif based off what you type
 end
 
 
+
+#PLAYER ------------------
+
 bot.command(:makeMe, description: "Initializes your character sheet", usage: "/makeMe Connor") do |event, *args|
   player = PStore.new("#{event.user.id}.pstore")
   player.transaction do
@@ -224,12 +227,15 @@ end
 bot.command(:makeStat, description: "Generates, and currently changes, a stat", usage: "/makeStat con 10") do |event, *args|
   player = PStore.new("#{event.user.id}.pstore")
   statName = checkValidStat(args[0])
-
   if statName == nil
     "#{args[0]} is not a valid Attribute"
   else
     player.transaction do
-      player[:"#{statName}"] = args[1]
+      if player.root?(:"#{statName}") == true
+        "#{statName} already exists!"
+      else
+        player[:"#{statName}"] = args[1]
+      end
     end
   end
 end
@@ -241,7 +247,11 @@ bot.command(:showMe, description: "Tells you one of your stats", usage: "/showMe
     "#{arg} is not a valid Attribute"
   else
     player.transaction do
+      if player.root?(:"#{statName}") == false
+        "--Did you mean /makeStat?"
+      else
       "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{statName}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
+      end
     end
   end
 end
