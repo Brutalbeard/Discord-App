@@ -267,7 +267,7 @@ bot.command(:showMe, description: "Tells you one of your stats", usage: "/showMe
   else
     player.transaction do
       if player.root?(:"#{statName}") == false
-        "--Did you mean /makeStat?"
+        "--#{statName} does not exist. \n --Did you mean /makeStat?"
       else
       "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{statName}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
       end
