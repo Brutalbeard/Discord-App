@@ -4,6 +4,28 @@ require 'open-uri'
 require 'pstore'
 require './playerClass'
 
+#FUNCTIONS
+def checkValidStat(arg) #Checks that the requested string is related to a valid Player Attribute
+  statName = arg
+  case statName
+  when "con" , "Con" , "constitution" , "Constitution"
+    return "Con"
+  when "dex" , "Dex" , "dexterity" , "Dexterity"
+    return "Dex"
+  when "int" , "Int" , "intelligence" , "Intelligence"
+    return "Int"
+  when "str" , "Str" , "strength" , "Strength"
+    return "Str"
+  when "wis" , "Wis" , "wisdom" , "Wisdom"
+    return "Wis"
+  else
+    return nil
+  end
+end
+
+
+#BOT
+
 bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
 
 
@@ -201,16 +223,26 @@ end
 
 bot.command(:makeStat, description: "Generates, and currently changes, a stat", usage: "/makeStat con 10") do |event, *args|
   player = PStore.new("#{event.user.id}.pstore")
+  statName = checkValidStat(args[0])
 
-  player.transaction do
-    player[:"#{args[0]}"] = args[1]
+  if statName == nil
+    "#{args[0]} is not a valid Attribute"
+  else
+    player.transaction do
+      player[:"#{statName}"] = args[1]
+    end
   end
 end
 
 bot.command(:showMe, description: "Tells you one of your stats", usage: "/showMe name, or /showMe con") do |event, arg|
   player = PStore.new("#{event.user.id}.pstore")
-  player.transaction do
-    "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{arg}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
+  statName = checkValidStat(arg)
+  if statName == nil
+    "#{arg} is not a valid Attribute"
+  else
+    player.transaction do
+      "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{statName}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
+    end
   end
 end
 
