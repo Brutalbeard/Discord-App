@@ -224,7 +224,7 @@ bot.command(:makeMe, description: "Initializes your character sheet", usage: "/m
   player.transaction {player[:name]}
 end
 
-bot.command(:makeStat, description: "Generates, and currently changes, a stat", usage: "/makeStat con 10") do |event, *args|
+bot.command(:makeStat, description: "Generates a stat, checks for preexisting.", usage: "/makeStat con 10") do |event, *args|
   player = PStore.new("#{event.user.id}.pstore")
   statName = checkValidStat(args[0])
   if statName == nil
@@ -239,6 +239,25 @@ bot.command(:makeStat, description: "Generates, and currently changes, a stat", 
     end
   end
 end
+
+bot.command(:changeStat, description: "If you screwed the pooch, ask Johnny or Fletcher to fix your crap with this.", usage: "@BrutalBeard please change my dex to 11? I owe you a bj. Brutalbeard: /changeStat @loser dex 11 ") do |event, *args|
+  authUsers = [150283399192510464, 143886187122262017]
+  if(authUsers.include? event.user.id)
+    chgTarget = bot.parse_mention(args[0])
+    player = PStore.new("#{chgTarget.id}.pstore")
+    statName = checkValidStat(args[1])
+    if statName == nil
+      "#{args[0]} is not a valid Attribute"
+    else
+      player.transaction do
+        player[:"#{statName}"] = args[2]
+      end
+    end
+  else
+    "Unauthorized user. Get hosed biatch."
+  end
+end
+
 
 bot.command(:showMe, description: "Tells you one of your stats", usage: "/showMe name, or /showMe con") do |event, arg|
   player = PStore.new("#{event.user.id}.pstore")
