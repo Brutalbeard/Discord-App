@@ -95,7 +95,7 @@ bot.command(:whoami, description: "Gives your name and user ID. Also tells you y
   end
 end
 
-bot.command(:whois, descrption: "Gives you the useful info about your cohorts", usage: "/whois @RollToDodge") do |event, arg|
+bot.command(:whois, description: "Gives you the useful info about your cohorts", usage: "/whois @RollToDodge") do |event, arg|
   user1 = bot.parse_mention(arg)
   event.respond "User Name: #{user1.name} \n"
   event.respond "#{user1.status}\n"
@@ -211,6 +211,16 @@ bot.command(:showMe, description: "Tells you one of your stats", usage: "/showMe
   player = PStore.new("#{event.user.id}.pstore")
   player.transaction do
     "#{player[:name]}'s #{arg.capitalize} is #{player[:"#{arg}"]}. The bonus is #{(player[:"#{arg}"].to_i-10)/2}."
+  end
+end
+
+bot.command (:vote) do |event, *args|
+  members = event.server.users
+  responses = Array.new
+  members.each do |member|
+    if member.status == :online
+      member.pm "#{args.join(" ")} - yes/no"
+    end
   end
 end
 
