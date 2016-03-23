@@ -45,12 +45,21 @@ bot.command(:shoot, description: "Shoots an arrow at whoever, or whatever you wa
   "#{event.author.mention} shoots an arrow at #{arg} for #{rand(1..8)} damage!"
 end
 
-bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, arg| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
-  if arg.match(/\d{1,}[d]\d{1,2}/) == nil
+bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an example") do |event, *args| # so the description and the usage are both for help. That's something the message above doesn't have. Event means, it happened I guess? Little fuzzy there. Then the 'arg' is whatever they type in after calling the command. Which runs through old faithful down below.
+  player = PStore.new("#{event.user.id}.pstore")
+  stat = checkValidStat(args[1])
+  player.transaction do
+    if player.root?(:"#{stat}") == false
+      puts "no stat"
+    else
+      $bonus = ((player[:"#{stat}"].to_i-10)/2)
+    end
+  end
+  if args[0].match(/\d{1,}[d]\d{1,2}/) == nil
     text = "Wrong syntax. Try /help roll"
   else
-    diceAmount = arg.split("d")[0].to_i
-    diceType = arg.split("d")[1].to_i
+    diceAmount = args[0].split("d")[0].to_i
+    diceType = args[0].split("d")[1].to_i
     rolls = Array.new()
     text = String.new()
     text << "#{event.user.name} rolled #{diceAmount}, #{diceType} sided die...\n"
@@ -60,7 +69,7 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
     totRoll += rolls[i]
     text << "Roll #{i}: #{rolls[i]} \n"
    end
-  text << "\nTotal: #{totRoll}"
+  text << "\nTotal: #{totRoll} + #{$bonus} \nFor a grand total of... #{totRoll + $bonus}"
   end
   text #so this also differs from the messages above. Don't have to put event.respond. That's what was causing those double responses earlier. Just put the variable adter the last 'end' which closes out the 'do' at the top. Then it sends back that variable. Boom.
 end
