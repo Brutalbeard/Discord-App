@@ -3,6 +3,10 @@ require 'json'
 require 'open-uri'
 require 'pstore'
 require './playerClass'
+require './creds'
+
+bot = Discordrb::Commands::CommandBot.new($email, $pass, $starter, {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
+
 
 #FUNCTIONS
 def checkValidStat(arg) #Checks that the requested string is related to a valid Player Attribute NOTE: returns nil if not a valid option
@@ -22,12 +26,6 @@ def checkValidStat(arg) #Checks that the requested string is related to a valid 
     return nil
   end
 end
-
-
-#BOT--------------------
-
-bot = Discordrb::Commands::CommandBot.new("jceloria@icloud.com", "suckit123", "/", {advanced_functionality: false}) #credentials for login, the last string is the thing you have to type to run our commands.
-
 
 #bot.message(containing: "test") do |event| #obvious test message. Leaving it in here as 'message' works slightly differently from command.
 #  event.respond "Your test worked- even though fletcher is in bed"
@@ -62,7 +60,7 @@ bot.command(:roll, description: "Returns a roll.", usage: "Type /roll 1d20 as an
     diceType = args[0].split("d")[1].to_i
     rolls = Array.new()
     text = String.new()
-    text << "#{event.user.name} rolled #{diceAmount}, #{diceType} sided die...\n"
+    text << "#{event.user.name} rolled #{diceAmount}, #{diceType} sided die, and added a #{args[1].capitalize} bonus of #{$bonus}\n"
     totRoll = 0
    for i in 1..(diceAmount)
     rolls[i] = (rand(1..diceType))
